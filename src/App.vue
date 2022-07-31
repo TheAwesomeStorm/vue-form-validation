@@ -5,7 +5,7 @@
 </script>
 
 <template>
-  <BaseForm class="base-form" />
+  <BaseForm />
 </template>
 
 <style scoped></style>

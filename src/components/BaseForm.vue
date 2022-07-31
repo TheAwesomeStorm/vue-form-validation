@@ -1,6 +1,7 @@
 <template>
-  <BaseInput label="Name" v-model:input-value="user.name" type="text" />
-  <BaseInput label="Age" v-model:input-value="user.age" type="number" />
+  <BaseInput label="Name" v-model="user.name" type="text" />
+  <BaseInput label="Age" v-model="user.age" type="number" />
+  <BaseInput label="E-mail" v-model="user.email" type="email" />
 
   <div class="field">
     <label class="label">Username</label>
@@ -82,7 +83,7 @@
   </div>
 
   <div class="field is-grouped">
-    <div class="control">
+    <div class="control" @click="submit">
       <button class="button is-link">Submit</button>
     </div>
     <div class="control">
@@ -91,9 +92,13 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
   import BaseInput from './BaseInput.vue';
-  export default {
+  import useVuelidate from '@vuelidate/core';
+  import { required, email } from '@vuelidate/validators';
+  import { defineComponent } from 'vue';
+
+  export default defineComponent({
     name: 'BaseForm',
     components: { BaseInput },
     data() {
@@ -101,10 +106,31 @@
         user: {
           name: '',
           age: 0,
+          email: '',
         },
       };
     },
-  };
+    methods: {
+      submit() {
+        if (this.v$.$invalid) return;
+        console.log(this.user);
+      },
+    },
+    validations() {
+      return {
+        user: {
+          name: { required },
+          age: { required },
+          email: { required, email },
+        },
+      };
+    },
+    setup() {
+      return {
+        v$: useVuelidate(),
+      };
+    },
+  });
 </script>
 
 <style scoped></style>

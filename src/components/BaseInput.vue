@@ -6,8 +6,8 @@
       name="base-input"
       v-bind="$attrs"
       :placeholder="label"
-      :value="inputValue"
-      @input="$emit('update:inputValue', $event.target.value)"
+      :value="$attrs.modelValue"
+      @input="$emit('update:modelValue', $event.target.value)"
     />
   </div>
 </template>
@@ -15,16 +15,12 @@
 <script>
   export default {
     name: 'BaseInput',
-    emits: ['update:inputValue'],
+    emits: ['update:modelValue'],
     props: {
       label: {
         type: String,
         default: '',
         required: true,
-      },
-      inputValue: {
-        type: [String, Number],
-        default: '',
       },
     },
   };
