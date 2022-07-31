@@ -1,10 +1,6 @@
 <template>
-  <div class="field">
-    <label class="label">Name</label>
-    <div class="control">
-      <input class="input" type="text" placeholder="Text input" />
-    </div>
-  </div>
+  <BaseInput label="Name" v-model:input-value="user.name" type="text" />
+  <BaseInput label="Age" v-model:input-value="user.age" type="number" />
 
   <div class="field">
     <label class="label">Username</label>
@@ -96,8 +92,18 @@
 </template>
 
 <script>
+  import BaseInput from './BaseInput.vue';
   export default {
     name: 'BaseForm',
+    components: { BaseInput },
+    data() {
+      return {
+        user: {
+          name: '',
+          age: 0,
+        },
+      };
+    },
   };
 </script>
 
