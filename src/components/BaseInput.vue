@@ -10,9 +10,14 @@
       @input="$emit('update:modelValue', $event.target.value)"
     />
   </div>
+  <div>
+    <p class="help is-danger" v-for="(error, index) in errors" :key="index">
+      {{ error.$message }}
+    </p>
+  </div>
 </template>
 
-<script>
+<script lang="ts">
   export default {
     name: 'BaseInput',
     emits: ['update:modelValue'],
@@ -21,6 +26,10 @@
         type: String,
         default: '',
         required: true,
+      },
+      errors: {
+        type: Array,
+        default: () => [],
       },
     },
   };

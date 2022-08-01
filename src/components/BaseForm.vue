@@ -1,7 +1,22 @@
 <template>
-  <BaseInput label="Name" v-model="user.name" type="text" />
-  <BaseInput label="Age" v-model="user.age" type="number" />
-  <BaseInput label="E-mail" v-model="user.email" type="email" />
+  <BaseInput
+    type="text"
+    label="Name"
+    v-model="userData.name"
+    :errors="v$.userData.name.$errors"
+  />
+  <BaseInput
+    type="number"
+    label="Age"
+    v-model="userData.age"
+    :errors="v$.userData.age.$errors"
+  />
+  <BaseInput
+    label="E-mail"
+    type="email"
+    v-model="userData.email"
+    :errors="v$.userData.email.$errors"
+  />
 
   <div class="field">
     <label class="label">Username</label>
@@ -64,7 +79,7 @@
     <div class="control">
       <label class="checkbox">
         <input type="checkbox" />
-        I agree to the <a href="#">terms and conditions</a>
+        I agree to the <a>terms and conditions</a>
       </label>
     </div>
   </div>
@@ -83,7 +98,7 @@
   </div>
 
   <div class="field is-grouped">
-    <div class="control" @click="submit">
+    <div class="control">
       <button class="button is-link">Submit</button>
     </div>
     <div class="control">
@@ -95,39 +110,45 @@
 <script lang="ts">
   import BaseInput from './BaseInput.vue';
   import useVuelidate from '@vuelidate/core';
-  import { required, email } from '@vuelidate/validators';
+  import {
+    required,
+    email,
+    minLength,
+    minValue,
+    helpers,
+  } from '@vuelidate/validators';
   import { defineComponent } from 'vue';
 
   export default defineComponent({
     name: 'BaseForm',
     components: { BaseInput },
+    setup() {
+      return {
+        v$: useVuelidate({ $autoDirty: true, $lazy: true }),
+      };
+    },
     data() {
       return {
-        user: {
+        userData: {
           name: '',
           age: 0,
           email: '',
         },
       };
     },
-    methods: {
-      submit() {
-        if (this.v$.$invalid) return;
-        console.log(this.user);
-      },
-    },
     validations() {
       return {
-        user: {
-          name: { required },
-          age: { required },
+        userData: {
+          name: {
+            required: helpers.withMessage('Campo obrigatório', required),
+            minLength: helpers.withMessage(
+              'Este campo deve conter no mínimo 3 caracteres',
+              minLength(3)
+            ),
+          },
+          age: { required, minValue: minValue(18) },
           email: { required, email },
         },
-      };
-    },
-    setup() {
-      return {
-        v$: useVuelidate(),
       };
     },
   });
