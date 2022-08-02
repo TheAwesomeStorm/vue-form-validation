@@ -1,11 +1,11 @@
 <template>
   <div class="field">
-    <label for="base-input" class="label">{{ label }}</label>
+    <label :for="label" class="label">{{ label }}</label>
     <div class="control" :class="iconsPlacement">
       <input
+        :name="label"
         class="input"
         :class="hasErrors"
-        name="base-input"
         v-bind="$attrs"
         :placeholder="label"
         :value="$attrs.modelValue"

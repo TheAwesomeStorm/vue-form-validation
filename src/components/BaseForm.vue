@@ -41,18 +41,13 @@
       <i class="fas fa-envelope"></i>
     </span>
   </BaseInput>
-
-  <div class="field">
-    <label class="label">Subject</label>
-    <div class="control">
-      <div class="select">
-        <select>
-          <option>Select dropdown</option>
-          <option>With options</option>
-        </select>
-      </div>
-    </div>
-  </div>
+  <BaseSelect
+    :options="['Male', 'Female', 'Non-binary']"
+    label="Gender"
+    v-model="userData.gender"
+    placeholder="Select your gender"
+    :errors="v$.userData.gender.$errors"
+  />
 
   <div class="field">
     <label class="label">Message</label>
@@ -96,18 +91,14 @@
 <script lang="ts">
   import BaseInput from './BaseInput.vue';
   import useVuelidate from '@vuelidate/core';
-  import {
-    required,
-    email,
-    minLength,
-    minValue,
-    helpers,
-  } from '@vuelidate/validators';
+  import { required, minLength } from '../utils/i18n-validators';
+  import { email, minValue } from '@vuelidate/validators';
   import { defineComponent } from 'vue';
+  import BaseSelect from './BaseSelect.vue';
 
   export default defineComponent({
     name: 'BaseForm',
-    components: { BaseInput },
+    components: { BaseSelect, BaseInput },
     setup() {
       return {
         v$: useVuelidate({ $autoDirty: true, $lazy: true }),
@@ -119,6 +110,7 @@
           name: '',
           age: 0,
           email: '',
+          gender: '',
         },
       };
     },
@@ -126,14 +118,12 @@
       return {
         userData: {
           name: {
-            required: helpers.withMessage('Campo obrigatório', required),
-            minLength: helpers.withMessage(
-              'Este campo deve conter no mínimo 3 caracteres',
-              minLength(3)
-            ),
+            required,
+            minLength: minLength(3),
           },
           age: { required, minValue: minValue(18) },
           email: { required, email },
+          gender: { required },
         },
       };
     },
