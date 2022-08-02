@@ -1,0 +1,7 @@
+{
+  "validations": {
+    "required": "O campo {property} é obrigatório.",
+    "minLength":
+    "O campo {property} tem um valor de '{model}', mas o número mínimo de caracteres é {min}."
+  }
+}
