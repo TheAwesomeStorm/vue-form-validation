@@ -1,5 +1,5 @@
 <template>
-  <BaseInput
+  <BaseTextTypeInput
     type="text"
     label="Name"
     v-model="userData.name"
@@ -23,14 +23,14 @@
     >
       <i class="fas fa-times"></i>
     </span>
-  </BaseInput>
-  <BaseInput
+  </BaseTextTypeInput>
+  <BaseTextTypeInput
     type="number"
     label="Age"
     v-model="userData.age"
     :errors="v$.userData.age.$errors"
   />
-  <BaseInput
+  <BaseTextTypeInput
     label="E-mail"
     type="email"
     v-model="userData.email"
@@ -40,7 +40,7 @@
     <span class="icon is-small is-left">
       <i class="fas fa-envelope"></i>
     </span>
-  </BaseInput>
+  </BaseTextTypeInput>
   <BaseSelect
     :options="['Male', 'Female', 'Non-binary']"
     label="Gender"
@@ -48,20 +48,17 @@
     placeholder="Select your gender"
     :errors="v$.userData.gender.$errors"
   />
-
-  <div class="field">
-    <label class="label">Message</label>
-    <div class="control">
-      <textarea class="textarea" placeholder="Textarea"></textarea>
-    </div>
-  </div>
-
+  <BaseTextArea
+    label="Message to the team"
+    placeholder="Comments"
+    v-model="userData.comments"
+    :errors="v$.userData.comments.$errors"
+  />
   <BaseCheckbox
     label="Subscribe to newsletter"
     v-model="userData.subscribe"
     :errors="v$.userData.subscribe.$errors"
   />
-
   <BaseRadio
     name="offer"
     :options="['Yes', 'No']"
@@ -81,18 +78,25 @@
 </template>
 
 <script lang="ts">
-  import BaseInput from './BaseInput.vue';
+  import BaseTextTypeInput from './BaseTextTypeInput.vue';
   import useVuelidate from '@vuelidate/core';
   import { required, minLength } from '../utils/i18n-validators';
-  import { email, minValue } from '@vuelidate/validators';
+  import { email, maxLength, minValue } from '@vuelidate/validators';
   import { defineComponent } from 'vue';
   import BaseSelect from './BaseSelect.vue';
   import BaseRadio from './BaseRadio.vue';
   import BaseCheckbox from './BaseCheckbox.vue';
+  import BaseTextArea from './BaseTextArea.vue';
 
   export default defineComponent({
     name: 'BaseForm',
-    components: { BaseCheckbox, BaseRadio, BaseSelect, BaseInput },
+    components: {
+      BaseTextArea,
+      BaseCheckbox,
+      BaseRadio,
+      BaseSelect,
+      BaseTextTypeInput,
+    },
     setup() {
       return {
         v$: useVuelidate({ $autoDirty: true, $lazy: true }),
@@ -105,6 +109,7 @@
           age: 0,
           email: '',
           gender: '',
+          comments: '',
           subscribe: false,
           terms: '',
         },
@@ -128,6 +133,7 @@
           age: { required, minValue: minValue(18) },
           email: { required, email },
           gender: { required },
+          comments: { maxLength: maxLength(256) },
           subscribe: { required },
           terms: { required },
         },

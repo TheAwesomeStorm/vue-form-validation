@@ -24,7 +24,7 @@
   import { InputIcon } from '../enums/input-icon';
 
   export default defineComponent({
-    name: 'BaseInput',
+    name: 'BaseTextTypeInput',
     computed: {
       hasErrors(): string {
         if (!this.isDirty) return '';
