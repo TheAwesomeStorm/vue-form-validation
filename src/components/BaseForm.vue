@@ -65,22 +65,17 @@
     </div>
   </div>
 
-  <div class="field">
-    <div class="control">
-      <label class="radio">
-        <input type="radio" name="question" />
-        Yes
-      </label>
-      <label class="radio">
-        <input type="radio" name="question" />
-        No
-      </label>
-    </div>
-  </div>
+  <BaseRadio
+    name="subscribe"
+    :options="['Yes', 'No', 'Maybe']"
+    question="Subscribe to newsletter?"
+    v-model="userData.subscribe"
+    :errors="v$.userData.subscribe.$errors"
+  />
 
   <div class="field is-grouped">
     <div class="control">
-      <button class="button is-link">Submit</button>
+      <button class="button is-link" @click="validate">Submit</button>
     </div>
     <div class="control">
       <button class="button is-link is-light">Cancel</button>
@@ -95,10 +90,11 @@
   import { email, minValue } from '@vuelidate/validators';
   import { defineComponent } from 'vue';
   import BaseSelect from './BaseSelect.vue';
+  import BaseRadio from './BaseRadio.vue';
 
   export default defineComponent({
     name: 'BaseForm',
-    components: { BaseSelect, BaseInput },
+    components: { BaseRadio, BaseSelect, BaseInput },
     setup() {
       return {
         v$: useVuelidate({ $autoDirty: true, $lazy: true }),
@@ -111,8 +107,17 @@
           age: 0,
           email: '',
           gender: '',
+          subscribe: '',
         },
       };
+    },
+    methods: {
+      async validate(): Promise<void> {
+        const isFormValid = await this.v$.$validate();
+        isFormValid
+          ? console.log('Formulário válido')
+          : console.log('Formulário inválido');
+      },
     },
     validations() {
       return {
@@ -124,6 +129,7 @@
           age: { required, minValue: minValue(18) },
           email: { required, email },
           gender: { required },
+          subscribe: { required },
         },
       };
     },
