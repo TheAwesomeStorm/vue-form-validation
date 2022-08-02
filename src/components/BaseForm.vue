@@ -56,21 +56,18 @@
     </div>
   </div>
 
-  <div class="field">
-    <div class="control">
-      <label class="checkbox">
-        <input type="checkbox" />
-        I agree to the <a>terms and conditions</a>
-      </label>
-    </div>
-  </div>
-
-  <BaseRadio
-    name="subscribe"
-    :options="['Yes', 'No', 'Maybe']"
-    question="Subscribe to newsletter?"
+  <BaseCheckbox
+    label="Subscribe to newsletter"
     v-model="userData.subscribe"
     :errors="v$.userData.subscribe.$errors"
+  />
+
+  <BaseRadio
+    name="offer"
+    :options="['Yes', 'No']"
+    question="Do you agree with the terms and conditions?"
+    v-model="userData.terms"
+    :errors="v$.userData.terms.$errors"
   />
 
   <div class="field is-grouped">
@@ -91,10 +88,11 @@
   import { defineComponent } from 'vue';
   import BaseSelect from './BaseSelect.vue';
   import BaseRadio from './BaseRadio.vue';
+  import BaseCheckbox from './BaseCheckbox.vue';
 
   export default defineComponent({
     name: 'BaseForm',
-    components: { BaseRadio, BaseSelect, BaseInput },
+    components: { BaseCheckbox, BaseRadio, BaseSelect, BaseInput },
     setup() {
       return {
         v$: useVuelidate({ $autoDirty: true, $lazy: true }),
@@ -107,7 +105,8 @@
           age: 0,
           email: '',
           gender: '',
-          subscribe: '',
+          subscribe: false,
+          terms: '',
         },
       };
     },
@@ -130,6 +129,7 @@
           email: { required, email },
           gender: { required },
           subscribe: { required },
+          terms: { required },
         },
       };
     },
