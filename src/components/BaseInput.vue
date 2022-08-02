@@ -1,16 +1,18 @@
 <template>
   <div class="field">
     <label for="base-input" class="label">{{ label }}</label>
-    <input
-      class="input"
-      name="base-input"
-      v-bind="$attrs"
-      :placeholder="label"
-      :value="$attrs.modelValue"
-      @input="$emit('update:modelValue', $event.target.value)"
-    />
-  </div>
-  <div>
+    <div class="control" :class="iconsPlacement">
+      <input
+        class="input"
+        :class="hasErrors"
+        name="base-input"
+        v-bind="$attrs"
+        :placeholder="label"
+        :value="$attrs.modelValue"
+        @input="$emit('update:modelValue', $event.target.value)"
+      />
+      <slot />
+    </div>
     <p class="help is-danger" v-for="(error, index) in errors" :key="index">
       {{ error.$message }}
     </p>
@@ -18,8 +20,18 @@
 </template>
 
 <script lang="ts">
-  export default {
+  import { defineComponent, PropType } from 'vue';
+  import { InputIcon } from '../enums/input-icon';
+
+  export default defineComponent({
     name: 'BaseInput',
+    computed: {
+      hasErrors(): string {
+        if (!this.isDirty) return '';
+        if (this.isValid) return 'is-success';
+        return 'is-danger';
+      },
+    },
     emits: ['update:modelValue'],
     props: {
       label: {
@@ -31,8 +43,19 @@
         type: Array,
         default: () => [],
       },
+      iconsPlacement: {
+        type: String as PropType<InputIcon>,
+        default: InputIcon.none,
+      },
+      isValid: {
+        type: Boolean,
+      },
+      isDirty: {
+        type: Boolean,
+        default: false,
+      },
     },
-  };
+  });
 </script>
 
 <style scoped></style>

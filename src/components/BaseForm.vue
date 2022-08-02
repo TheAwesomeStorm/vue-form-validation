@@ -4,7 +4,26 @@
     label="Name"
     v-model="userData.name"
     :errors="v$.userData.name.$errors"
-  />
+    icons-placement="has-icons-left has-icons-right"
+    :is-dirty="v$.userData.name.$dirty"
+    :is-valid="!v$.userData.name.$invalid"
+  >
+    <span class="icon is-small is-left">
+      <i class="fas fa-user"></i>
+    </span>
+    <span
+      v-if="!v$.userData.name.$invalid && v$.userData.name.$dirty"
+      class="icon is-small is-right"
+    >
+      <i class="fas fa-check"></i>
+    </span>
+    <span
+      v-if="v$.userData.name.$invalid && v$.userData.name.$dirty"
+      class="icon is-small is-right"
+    >
+      <i class="fas fa-times"></i>
+    </span>
+  </BaseInput>
   <BaseInput
     type="number"
     label="Age"
@@ -16,45 +35,12 @@
     type="email"
     v-model="userData.email"
     :errors="v$.userData.email.$errors"
-  />
-
-  <div class="field">
-    <label class="label">Username</label>
-    <div class="control has-icons-left has-icons-right">
-      <input
-        class="input is-success"
-        type="text"
-        placeholder="Text input"
-        value="bulma"
-      />
-      <span class="icon is-small is-left">
-        <i class="fas fa-user"></i>
-      </span>
-      <span class="icon is-small is-right">
-        <i class="fas fa-check"></i>
-      </span>
-    </div>
-    <p class="help is-success">This username is available</p>
-  </div>
-
-  <div class="field">
-    <label class="label">Email</label>
-    <div class="control has-icons-left has-icons-right">
-      <input
-        class="input is-danger"
-        type="email"
-        placeholder="Email input"
-        value="hello@"
-      />
-      <span class="icon is-small is-left">
-        <i class="fas fa-envelope"></i>
-      </span>
-      <span class="icon is-small is-right">
-        <i class="fas fa-exclamation-triangle"></i>
-      </span>
-    </div>
-    <p class="help is-danger">This email is invalid</p>
-  </div>
+    icons-placement="has-icons-left"
+  >
+    <span class="icon is-small is-left">
+      <i class="fas fa-envelope"></i>
+    </span>
+  </BaseInput>
 
   <div class="field">
     <label class="label">Subject</label>
