@@ -1,9 +1,9 @@
 <template>
-  <div class="field">
+  <div class="field" :class="$attrs.class">
     <label class="label">{{ label }}</label>
     <div class="control">
       <textarea
-        v-bind="$attrs"
+        :placeholder="$attrs.placeholder"
         :value="$attrs.modelValue"
         @input="$emit('update:modelValue', $event.target.value)"
         class="textarea"
@@ -26,6 +26,12 @@
       default: () => [],
     },
   });
+</script>
+
+<script lang="ts">
+  export default {
+    inheritAttrs: false,
+  };
 </script>
 
 <style scoped></style>

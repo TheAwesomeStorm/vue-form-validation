@@ -1,12 +1,12 @@
 <template>
-  <div class="field">
+  <div class="field" :class="$attrs.class">
     <label :for="label" class="label">{{ label }}</label>
     <div class="control" :class="iconsPlacement">
       <input
         :name="label"
         class="input"
         :class="hasErrors"
-        v-bind="$attrs"
+        :type="$attrs.type"
         :placeholder="label"
         :value="$attrs.modelValue"
         @input="$emit('update:modelValue', $event.target.value)"
@@ -33,6 +33,7 @@
       },
     },
     emits: ['update:modelValue'],
+    inheritAttrs: false,
     props: {
       label: {
         type: String,
