@@ -54,6 +54,11 @@
     v-model="userData.comments"
     :errors="v$.userData.comments.$errors"
   />
+  <BaseMultipleCheckbox
+    question="Where did you hear about this offer?"
+    :options="['Google', 'LinkedIn', 'Facebook', 'Instagram', 'Twitter']"
+    v-model="userData.marketing"
+  />
   <BaseCheckbox
     label="Subscribe to newsletter"
     v-model="userData.subscribe"
@@ -87,6 +92,7 @@
   import BaseRadio from './BaseRadio.vue';
   import BaseCheckbox from './BaseCheckbox.vue';
   import BaseTextArea from './BaseTextArea.vue';
+  import BaseMultipleCheckbox from './BaseMultipleCheckbox.vue';
 
   export default defineComponent({
     name: 'BaseForm',
@@ -96,6 +102,7 @@
       BaseRadio,
       BaseSelect,
       BaseTextTypeInput,
+      BaseMultipleCheckbox,
     },
     setup() {
       return {
@@ -112,6 +119,7 @@
           comments: '',
           subscribe: false,
           terms: '',
+          marketing: [] as string[],
         },
       };
     },
