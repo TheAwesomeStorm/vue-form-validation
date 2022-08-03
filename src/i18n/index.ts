@@ -7,8 +7,10 @@ const messages = {
   pt_BR,
 };
 
+const localStorageLocale = localStorage.getItem('lang') || '';
+
 export const i18n = createI18n({
-  locale: 'pt_BR',
+  locale: localStorageLocale,
   fallbackLocale: 'en',
   messages,
 });
