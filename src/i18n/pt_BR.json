@@ -2,6 +2,9 @@
   "validations": {
     "required": "O campo {property} é obrigatório.",
     "minLength":
-    "O campo {property} tem um valor de '{model}', mas o número mínimo de caracteres é {min}."
+    "O campo {property} tem um valor de '{model}', mas o número mínimo de caracteres é {min}.",
+    "maxLength": "O número máximo de caracteres é {max}",
+    "minValue": "O menor valor permitido é {min}",
+    "email": "O valor não é um e-mail válido"
   }
 }

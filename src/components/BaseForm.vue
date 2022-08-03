@@ -91,8 +91,13 @@
 <script lang="ts">
   import BaseTextTypeInput from './BaseTextTypeInput.vue';
   import useVuelidate from '@vuelidate/core';
-  import { required, minLength } from '../utils/i18n-validators';
-  import { email, maxLength, minValue } from '@vuelidate/validators';
+  import {
+    required,
+    minLength,
+    maxLength,
+    minValue,
+    email,
+  } from '../utils/i18n-validators';
   import { defineComponent } from 'vue';
   import BaseSelect from './BaseSelect.vue';
   import BaseRadio from './BaseRadio.vue';

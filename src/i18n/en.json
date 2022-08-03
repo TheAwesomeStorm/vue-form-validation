@@ -2,6 +2,9 @@
   "validations": {
     "required": "The field {property} is required.",
     "minLength":
-    "The {property} field has a value of '{model}', but it must have a min length of {min}."
+    "The {property} field has a value of '{model}', but it must have a min length of {min}.",
+    "maxLength": "The maximum length allowed is {max}",
+    "minValue": "The minimum value allowed is {min}",
+    "email": "Value is not a valid email address"
   }
 }
