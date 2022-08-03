@@ -89,7 +89,7 @@
 </template>
 
 <script lang="ts">
-  import BaseTextTypeInput from './BaseTextTypeInput.vue';
+  import BaseTextTypeInput from './form/BaseTextTypeInput.vue';
   import useVuelidate from '@vuelidate/core';
   import {
     required,
@@ -99,14 +99,14 @@
     email,
   } from '../utils/i18n-validators';
   import { defineComponent } from 'vue';
-  import BaseSelect from './BaseSelect.vue';
-  import BaseRadio from './BaseRadio.vue';
-  import BaseCheckbox from './BaseCheckbox.vue';
-  import BaseTextArea from './BaseTextArea.vue';
-  import BaseMultipleCheckbox from './BaseMultipleCheckbox.vue';
+  import BaseSelect from './form/BaseSelect.vue';
+  import BaseRadio from './form/BaseRadio.vue';
+  import BaseCheckbox from './form/BaseCheckbox.vue';
+  import BaseTextArea from './form/BaseTextArea.vue';
+  import BaseMultipleCheckbox from './form/BaseMultipleCheckbox.vue';
 
   export default defineComponent({
-    name: 'BaseForm',
+    name: 'FormSample',
     components: {
       BaseTextArea,
       BaseCheckbox,

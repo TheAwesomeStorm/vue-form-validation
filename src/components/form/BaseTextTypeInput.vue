@@ -21,7 +21,7 @@
 
 <script lang="ts">
   import { defineComponent, PropType } from 'vue';
-  import { InputIcon } from '../enums/input-icon';
+  import { InputIcon } from '../../enums/input-icon';
 
   export default defineComponent({
     name: 'BaseTextTypeInput',
