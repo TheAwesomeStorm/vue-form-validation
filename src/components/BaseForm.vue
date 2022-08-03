@@ -74,7 +74,13 @@
 
   <div class="field is-grouped">
     <div class="control">
-      <button class="button is-link" @click="validate">Submit</button>
+      <button
+        class="button is-link"
+        @click="validate"
+        :disabled="isFormInvalid"
+      >
+        Submit
+      </button>
     </div>
     <div class="control">
       <button class="button is-link is-light">Cancel</button>
@@ -111,6 +117,7 @@
     },
     data() {
       return {
+        isFormInvalid: false,
         userData: {
           name: '',
           age: 0,
@@ -126,9 +133,12 @@
     methods: {
       async validate(): Promise<void> {
         const isFormValid = await this.v$.$validate();
-        isFormValid
-          ? console.log('Formulário válido')
-          : console.log('Formulário inválido');
+        if (!isFormValid) {
+          this.isFormInvalid = true;
+          return;
+        }
+        this.isFormInvalid = false;
+        console.log('Formulário válido');
       },
     },
     validations() {
