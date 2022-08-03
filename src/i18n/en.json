@@ -1,4 +1,41 @@
 {
+  "lang": {
+    "english": "English",
+    "brazilian-portuguese": "Brazilian Portuguese"
+  },
+  "form": {
+    "name": "Name",
+    "age": "Age",
+    "email": "Email",
+    "gender": {
+      "description": "Gender",
+      "options": {
+        "placeholder": "Select your gender",
+        "male": "Male",
+        "female": "Female",
+        "non-binary": "Non-binary"
+      }
+    },
+    "message": {
+      "label": "Message to the team",
+      "placeholder": "Comments"
+    },
+    "offer": {
+      "description": "Where did you hear about this offer?"
+    },
+    "newsletter": "Subscribe to newsletter",
+    "terms": {
+      "description": "Do you agree with the terms and conditions?",
+      "options": {
+        "yes": "Yes",
+        "no": "No"
+      }
+    },
+    "buttons": {
+      "submit": "Submit",
+      "cancel": "Cancel"
+    }
+  },
   "validations": {
     "required": "The field {property} is required.",
     "minLength":

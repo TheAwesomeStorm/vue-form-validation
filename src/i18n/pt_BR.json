@@ -1,4 +1,41 @@
 {
+  "lang": {
+    "english": "Inglês",
+    "brazilian-portuguese": "Português Brasileiro"
+  },
+  "form": {
+    "name": "Nome",
+    "age": "Idade",
+    "email": "E-mail",
+    "gender": {
+      "description": "Gênero",
+      "options": {
+        "placeholder": "Selecione seu gênero",
+        "male": "Masculino",
+        "female": "Feminino",
+        "non-binary": "Não binário"
+      }
+    },
+    "message": {
+      "label": "Mensagem para o time",
+      "placeholder": "Comentários"
+    },
+    "offer": {
+      "description": "Onde soube sobre esta oferta?"
+    },
+    "newsletter": "Inscrever-se nas noticias diárias",
+    "terms": {
+      "description": "Você concorda com os termos e condições?",
+      "options": {
+        "yes": "Sim",
+        "no": "Não"
+      }
+    },
+    "buttons": {
+      "submit": "Confirmar",
+      "cancel": "Cancelar"
+    }
+  },
   "validations": {
     "required": "O campo {property} é obrigatório.",
     "minLength":

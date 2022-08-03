@@ -6,8 +6,8 @@
       v-model="lang"
       @change="modifyAppLanguage($event)"
     >
-      <option value="en">English</option>
-      <option value="pt_BR">Brazilian Portuguese</option>
+      <option value="en">{{ $t('lang.english') }}</option>
+      <option value="pt_BR">{{ $t('lang.brazilian-portuguese') }}</option>
     </select>
   </div>
 </template>
